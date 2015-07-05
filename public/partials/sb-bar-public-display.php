@@ -139,11 +139,11 @@
 
 			<?php if(!isset($options["disable-share"])) { ?>
 			<ul class="sb_share">
-			    <li class="facebook"><a href="<?php the_permalink(); ?>" title="Share on Facebook" class="soc-fb" target="_blank"><i class="icon-facebook"></i><span>Share on Facebook</span></a></li>
-			    <li class="twitter"><a href="<?php the_permalink(); ?>" title="Share on Twitter" class="soc-tw" target="_blank" ><i class="icon-twitter"></i><span>Share on Twitter</span></a></li>
-			    <li class="google-plus"><a href="<?php the_permalink(); ?>" title="Share on Google Plus" class="soc-gplus" target="_blank"><i class="icon-gplus"></i><span>Share on Google Plus</span></a></li>
-			    <li class="linkedin"><a href="<?php the_permalink(); ?>" title="Share on Linkedin" class="soc-linked" target="_blank"><i class="icon-linkedin"></i><span>Share on LinkedIn</span></a></li>
-    			<li class="pinterest"><a href="<?php the_permalink(); ?>" title="Share on Pinterest" class="soc-pint" target="_blank"><i class="icon-pinterest"></i><span>Share on Pinterest</span></a></li>
+			    <li class="sbfacebook"><a href="<?php the_permalink(); ?>" title="Share on Facebook" class="sbsoc-fb" target="_blank"><i class="icon-facebook"></i><span>Share on Facebook</span></a></li>
+			    <li class="sbtwitter"><a href="<?php the_permalink(); ?>" title="Share on Twitter" class="sbsoc-tw" target="_blank" ><i class="icon-twitter"></i><span>Share on Twitter</span></a></li>
+			    <li class="sbgoogle-plus"><a href="<?php the_permalink(); ?>" title="Share on Google Plus" class="sbsoc-gplus" target="_blank"><i class="icon-gplus"></i><span>Share on Google Plus</span></a></li>
+			    <li class="sblinkedin"><a href="<?php the_permalink(); ?>" title="Share on Linkedin" class="sbsoc-linked" target="_blank"><i class="icon-linkedin"></i><span>Share on LinkedIn</span></a></li>
+    			<li class="sbpinterest"><a href="<?php the_permalink(); ?>" title="Share on Pinterest" class="sbsoc-pint" target="_blank"><i class="icon-pinterest"></i><span>Share on Pinterest</span></a></li>
 			</ul>
 			<?php } ?>
 

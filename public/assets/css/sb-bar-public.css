@@ -264,27 +264,27 @@ body.single {
 .sb_share li a span {
   display: none;
 }
-.sb_share li.facebook a{
+.sb_share li.sbfacebook a{
   width: auto;
   padding: 0 10px;
 }
-.sb_share li.facebook a span {
+.sb_share li.sbfacebook a span {
   display: inline-block;
   padding-left: 10px;
 }
-.sb_share li a.soc-tw{
+.sb_share li a.sbsoc-tw{
   background-color: #00c3f3;
 }
-.sb_share li a.soc-fb{
+.sb_share li a.sbsoc-fb{
   background-color: #2d609b;
 }
-.sb_share li a.soc-gplus{
+.sb_share li a.sbsoc-gplus{
   background-color: #eb4026;
 }
-.sb_share li a.soc-linked{
+.sb_share li a.sbsoc-linked{
   background-color: #0074a1;
 }
-.sb_share li a.soc-pint{
+.sb_share li a.sbsoc-pint{
   background-color: #ca212a;
 }
 
@@ -294,7 +294,7 @@ body.single {
   .sb_post-data,.sb_text-size {
     display: none;
   }
-  .sb_share li.facebook a {
+  .sb_share li.sbfacebook a {
     width: 34px;
     padding: 0;
   }

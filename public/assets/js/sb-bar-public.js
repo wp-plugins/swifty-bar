@@ -91,20 +91,29 @@
 	$(document).ready(function() {
 
 		$('.sb_share').socShare({
-			facebook : '.soc-fb',
-			twitter : '.soc-tw',
-			google_plus : '.soc-gplus',
-			linked_in : '.soc-linked',
-			pinterest : '.soc-pint'
+			facebook : '.sbsoc-fb',
+			twitter : '.sbsoc-tw',
+			google_plus : '.sbsoc-gplus',
+			linked_in : '.sbsoc-linked',
+			pinterest : '.sbsoc-pint'
 		});
 		
         // Define Variables
-        var docOffset = $(".ttr_start").offset().top,
-        	docEndOffset = $(".ttr_end").offset().top,
+        var ttr_start = $(".ttr_start"),
+            ttr_end = $(".ttr_end"),
+            docOffset = ttr_start.offset().top,
+        	docEndOffset = ttr_end.offset().top,
             elmHeight = docEndOffset - docOffset,
             progressBar = $('.progress-bar'),
             winHeight = $(window).height(),
             docScroll,viewedPortion;
+
+        //Recalculate offsets after images are loaded
+        $(window).load(function(){
+            docOffset = ttr_start.offset().top,
+            docEndOffset = ttr_end.offset().top,
+            elmHeight = docEndOffset - docOffset;
+        });
 
         // On Scroll
         $(window).on('scroll', function() {
@@ -126,8 +135,8 @@
 
 		// On Resize
 		$(window).on('resize', function() {
-			docOffset = $(".ttr_start").offset().top;
-			docEndOffset = $(".ttr_end").offset().top;
+			docOffset = ttr_start.offset().top;
+			docEndOffset = ttr_end.offset().top;
 			elmHeight = docEndOffset - docOffset;
 			winHeight = $(window).height();
 			$(window).trigger('scroll');

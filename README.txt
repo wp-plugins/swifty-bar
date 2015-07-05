@@ -1,9 +1,9 @@
 === Swifty Bar ===
 Contributors: goran87
-Tags: share buttons,sticky bar, footer bar, previous next posts, time to read, progress bar
+Tags: share buttons,sticky bar, footer bar, previous next posts, time to read, progress bar, simple share, share icons, sticky share,author,social,twitter,facebook
 Requires at least: 3.0
 Tested up to: 4.2.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,10 @@ We will add them slowly in new updates. Post on forums which one you need and we
 2. screenshot-2.png
 
 == Changelog ==
+
+= 1.0.1 =
+* Optimized jQuery and better recalculation - thanks Ante
+* Added plugin prefix to social class - thanks Borko
 
 = 1.0 =
 * Initial Release 3 July 2015
