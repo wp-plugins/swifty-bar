@@ -48,6 +48,9 @@ We will add them slowly in new updates. Post on forums which one you need and we
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixed Custom Post Type Prev/Next Error 5 July 2015
+
 = 1.0.1 =
 * Optimized jQuery and better recalculation - thanks Ante
 * Added plugin prefix to social class - thanks Borko
