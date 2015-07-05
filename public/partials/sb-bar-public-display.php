@@ -94,7 +94,9 @@
 						<div class="sb_next_post_info">
 							<span class="sb_title">
 								<span class="sb_category">
-									<?php $category = get_the_category($next_post->ID); echo $category[0]->cat_name; ?>
+									<?php if($post_type->label == "Posts") {
+											$category = get_the_category($next_post->ID); echo $category[0]->cat_name; 
+										} ?>
 								</span>
 								<span class="sb_tcategory">
 									<?php 
@@ -120,7 +122,9 @@
 						<div class="sb_next_post_info">
 							<span class="sb_title">
 								<span class="sb_category">
-									<?php $category = get_the_category($prev_post->ID); echo $category[0]->cat_name; ?>
+									<?php if($post_type->label == "Posts") {
+											$category = get_the_category($prev_post->ID); echo $category[0]->cat_name; 
+										} ?>
 								</span>
 								<span class="sb_tcategory">
 									<?php 

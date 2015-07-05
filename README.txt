@@ -11,7 +11,7 @@ Adds sticky bar at the bottom of post that shows category,post title, author, ti
 
 == Description ==
 
-Adds sticky bar at the bottom of post that shows category, post title, author, time needed to read article, share buttons and previouse/next post links. This plugin can easly replace your social share buttons while giving readers better experience with much more options. Coded with best practice, it is super light and will not slow down your site.
+Adds sticky bar at the bottom of post that shows category, post title, author, time needed to read article, share buttons and previous/next post links. This plugin can easily replace your social share buttons while giving readers better experience with much more options. Coded with best practice, it is super light and will not slow down your site.
 
 Check out demo [here](http://itsgoran.com/wp/teaching-civil-rights-without-a-textbook/)
 
