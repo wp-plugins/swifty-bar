@@ -26,6 +26,8 @@ Major features in Swifty Bar include:
 * Admin Panel to customize each module.
 * Supports custom post types.
 
+If you have any suggestions/feedback to improve Swifty Bar, please get in touch with me via email goranefbl@gmail.com .
+
 
 == Installation ==
 
