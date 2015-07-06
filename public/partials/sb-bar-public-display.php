@@ -64,7 +64,7 @@
 	<div id="sb_super_bar">
 
 		<?php if(!isset($options["disable-ttr"])) { ?>
-			<div class="progress-container"><span class="progress-bar"></span></div>
+			<div class="sbprogress-container"><span class="sbprogress-bar"></span></div>
 		<?php } ?>
 
 		<div id="sb_main_bar">
@@ -150,11 +150,11 @@
 
 			<?php if(!isset($options["disable-share"])) { ?>
 			<ul class="sb_share">
-			    <li class="sbfacebook"><a href="<?php the_permalink(); ?>" title="Share on Facebook" class="sbsoc-fb" target="_blank"><i class="icon-facebook"></i><span>Share on Facebook</span></a></li>
-			    <li class="sbtwitter"><a href="<?php the_permalink(); ?>" title="Share on Twitter" class="sbsoc-tw" target="_blank" ><i class="icon-twitter"></i><span>Share on Twitter</span></a></li>
-			    <li class="sbgoogle-plus"><a href="<?php the_permalink(); ?>" title="Share on Google Plus" class="sbsoc-gplus" target="_blank"><i class="icon-gplus"></i><span>Share on Google Plus</span></a></li>
-			    <li class="sblinkedin"><a href="<?php the_permalink(); ?>" title="Share on Linkedin" class="sbsoc-linked" target="_blank"><i class="icon-linkedin"></i><span>Share on LinkedIn</span></a></li>
-    			<li class="sbpinterest"><a href="<?php the_permalink(); ?>" title="Share on Pinterest" class="sbsoc-pint" target="_blank"><i class="icon-pinterest"></i><span>Share on Pinterest</span></a></li>
+			    <li class="sbfacebook"><a href="#" title="Share on Facebook" class="sbsoc-fb" target="_blank"><i class="icon-facebook"></i><span>Share on Facebook</span></a></li>
+			    <li class="sbtwitter"><a href="#" data-title="<?php the_title(); ?>" title="Share on Twitter" class="sbsoc-tw" target="_blank" ><i class="icon-twitter"></i><span>Share on Twitter</span></a></li>
+			    <li class="sbgoogle-plus"><a href="#" title="Share on Google Plus" class="sbsoc-gplus" target="_blank"><i class="icon-gplus"></i><span>Share on Google Plus</span></a></li>
+			    <li class="sblinkedin"><a href="#" title="Share on Linkedin" class="sbsoc-linked" target="_blank"><i class="icon-linkedin"></i><span>Share on LinkedIn</span></a></li>
+    			<li class="sbpinterest"><a href="#" title="Share on Pinterest" class="sbsoc-pint" target="_blank"><i class="icon-pinterest"></i><span>Share on Pinterest</span></a></li>
 			</ul>
 			<?php } ?>
 

@@ -48,6 +48,9 @@ We will add them slowly in new updates. Post on forums which one you need and we
 
 == Changelog ==
 
+= 1.0.4 =
+* Fixed twitter title for sharing and changed progress bar class with plugin prefix - 6 July 2015
+
 = 1.0.3 =
 * Support category links for non english sites - 5 July 2015
 
