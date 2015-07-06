@@ -29,7 +29,8 @@
     				break;
     			
     			case 'twitter':
-    				var url = 'https://twitter.com/share?url=';
+                    var posttitle = $(".sbtwitter a").data("title");
+                    var url = 'https://twitter.com/intent/tweet?text='+posttitle+'&url=';
     				var name = 'Twitter';
     				_popup(url, name, opts[opt], 440, 600);
     				break;
@@ -104,7 +105,7 @@
             docOffset = ttr_start.offset().top,
         	docEndOffset = ttr_end.offset().top,
             elmHeight = docEndOffset - docOffset,
-            progressBar = $('.progress-bar'),
+            progressBar = $('.sbprogress-bar'),
             winHeight = $(window).height(),
             docScroll,viewedPortion;
 
