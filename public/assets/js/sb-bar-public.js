@@ -143,9 +143,9 @@
 			$(window).trigger('scroll');
 		});
 
-		$(".sb_prev-next-posts a").on('mouseenter', function(){
+		$(".sb_prev-next-posts a").on('mouseenter touchstart', function(){
 			$(this).next('div').css("top","-170px");
-		}).on('mouseleave', function(){
+		}).on('mouseleave touchend', function(){
 			$(this).next('div').css("top","46px");
 		});
 
