@@ -17,48 +17,81 @@
 flush_rewrite_rules();
 ?>
 <div class="wrap">
+	<?php
+		$tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general';
+		$this->sb_bar_render_tabs(); 
+	?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="postbox-container-2" class="postbox-container">
-				<div id="top-sortables" class="meta-box-sortables ui-sortable">
-					<div id="itsec_self_protect" class="postbox ">
-						<h3 class="hndle"><span>Super Fast Footer Sticky Bar</span></h3>
-						<div class="inside">
-							<p>Thanks for installing Swifty Bar!</p>
-							<p>This plugin is lightweight and can easly replace mulitple of your plugins, such as social share, next/prev posts and time to read. 
-							<br/>Its coded with best practice, it is super fast and you can expect regular updates with new options, so check back here often.</p>
-						</div>
-					</div>
-				</div>
-				<form method="post" action="options.php">				
-					<div id="normal-sortables" class="meta-box-sortables ui-sortable">
-						<div id="itsec_get_started" class="postbox ">
-							<h3 class="hndle"><span>General Settings</span></h3>
-							<div class="inside">
-								<?php 
-									settings_fields( 'sb_bar_options' );
+				<?php 
+				// If no tab or general
+				switch ($tab) {
+					case 'enable': ?>
+						<form method="post" action="options.php">
+							<div id="normal-sortables" class="meta-box-sortables ui-sortable">
+								<div id="itsec_get_started" class="postbox ">
+									<h3 class="hndle"><span>Enable/Disable Swifty Bar Modules</span></h3>
+									<div class="inside">
+										<?php
+											settings_fields( 'sb_bar_enable_options' );
 
-									do_settings_sections( 'sb_bar' );
-								?>
-								<div class="clear"></div>
+											do_settings_sections( 'sb_bar_enable-enable' );
+											
+											submit_button( 'Save Settings' );
+										?>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</div>
+						</form>
+					<?php
+						break;
+					case 'premium': ?>
+						<h2>Coming soon!</h2>
+						<h4>- Share via Whatzup.</h4>
+						<h4>- Show both title and share buttons on mobile also</h4>
+						<h4>- Mailchimp Opt In/Subscribe box.</h4>
+						<h4>- Colorpicker to brand it to yours brand color.</h4>
+						<h4>- Advertising message/image that can jump after users is done reading.</h4>
+						<h4>- New networks.</h4>
+						<h4>- Next Post card shows automatically after user has finished reading.</h4>
+						<p>If you have some other ideas, let me know via email: goranefbl@gmail.com .</br> Thanks for all your support. Subscribe to the right to get notified once premium is out.</p>
+					<?php
+						break;
+					default: ?>
+						<div id="top-sortables" class="meta-box-sortables ui-sortable">
+							<div id="itsec_self_protect" class="postbox ">
+								<h3 class="hndle"><span>Super Fast Footer Sticky Bar</span></h3>
+								<div class="inside">
+									<p>Thanks for installing Swifty Bar!</p>
+									<p>This plugin is lightweight and can easly replace mulitple of your plugins, such as social share, next/prev posts and time to read. 
+									<br/>Its coded with best practice, it is super fast and you can expect regular updates with new options, so check back here often.</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div id="normal-sortables" class="meta-box-sortables ui-sortable">
-						<div id="itsec_get_started" class="postbox ">
-							<h3 class="hndle"><span>Enable/Disable Swifty Bar Modules</span></h3>
-							<div class="inside">
-								<?php 
-									do_settings_sections( 'sb_bar-enable' );
+						<form method="post" action="options.php">				
+							<div id="normal-sortables" class="meta-box-sortables ui-sortable">
+								<div id="itsec_get_started" class="postbox ">
+									<h3 class="hndle"><span>General Settings</span></h3>
+									<div class="inside">
+										<?php 
+											settings_fields( 'sb_bar_options' );
 
-									submit_button( 'Save Settings' );
-								?>
-								<div class="clear"></div>
+											do_settings_sections( 'sb_bar' );
+
+											submit_button( 'Save Settings' );
+										?>
+										<div class="clear"></div>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-				</form>
+						</form>
+					<?php	
+						break;
+				} ?>
+
 			</div>
 			<div id="postbox-container-1" class="postbox-container">
 				<div id="priority_side-sortables" class="meta-box-sortables ui-sortable">

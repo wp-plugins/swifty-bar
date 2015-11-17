@@ -2,8 +2,8 @@
 Contributors: goran87
 Tags: share buttons,sticky bar, footer bar, previous next posts, time to read, progress bar, simple share, share icons, sticky share,author,social,twitter,facebook
 Requires at least: 3.0
-Tested up to: 4.2.3
-Stable tag: 1.1.0
+Tested up to: 4.3.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,7 +11,7 @@ Adds sticky bar at the bottom of post that shows category,post title, author, ti
 
 == Description ==
 
-Adds sticky bar at the bottom of post that shows category, post title, author, time needed to read article, share buttons and previous/next post links. This plugin can easily replace your social share buttons while giving readers better experience with much more options. Coded with best practice, it is super light and will not slow down your site.
+Adds sticky bar at the bottom of post that shows category, post title, author, time needed to read article, share buttons together with share count, and previous/next post links. This plugin can easily replace your social share buttons while giving readers better experience with much more options. Coded with best practice, it is super light and will not slow down your site.
 
 Check out demo [here](http://itsgoran.com/wp/teaching-civil-rights-without-a-textbook/)
 
@@ -25,6 +25,7 @@ Major features in Swifty Bar include:
 * Super light, clean code that will not slow down your site.
 * Admin Panel to customize each module.
 * Supports custom post types.
+* Share counter
 
 If you have any suggestions/feedback to improve Swifty Bar, please get in touch with me via email goranefbl@gmail.com .
 
@@ -47,6 +48,18 @@ We will add them slowly in new updates. Post on forums which one you need and we
 2. screenshot-2.png
 
 == Changelog ==
+
+= 1.2.0 =
+* Added share count for each share icon. 
+* New share icons design
+* Preparation for premium version
+* Added twitter share via
+* Hiding time to read wont hide time to read bar now.
+
+= 1.1.1 =
+* sbicon- class changed to sbicn to remove conflict with icomoon font
+* Limit title length, so that share does not get hidden in posts with long titles.
+* Chose which social share button to display.
 
 = 1.1.0 =
 * icon- class changed to sbicon class because of some theme conflicts

@@ -30,7 +30,8 @@
     			
     			case 'twitter':
                     var posttitle = $(".sbtwitter a").data("title");
-                    var url = 'https://twitter.com/intent/tweet?text='+posttitle+'&url=';
+                    var via = $(".sbtwitter a").data("via");
+                    var url = 'https://twitter.com/intent/tweet?via='+via+'text='+posttitle+'&url=';
     				var name = 'Twitter';
     				_popup(url, name, opts[opt], 440, 600);
     				break;
@@ -126,13 +127,24 @@
 				viewedPortion = 0; 
 			}
             if(viewedPortion > elmHeight) { 
-            	viewedPortion = elmHeight;  
+            	viewedPortion = elmHeight;
+            //   fireNextPage();
+            } else {
+            //   hideNextPage();
             }
             // viewed percentage
             var viewedPercentage = (viewedPortion / elmHeight) * 100;
 			progressBar.css({ width: viewedPercentage + '%' });
 
 		});
+
+        function fireNextPage() {
+            $(".sb_next_post").css("top","-170px");
+        }
+
+        function hideNextPage() {
+            $(".sb_next_post").css("top","46px");
+        }
 
 		// On Resize
 		$(window).on('resize', function() {
@@ -144,10 +156,26 @@
 		});
 
 		$(".sb_prev-next-posts a").on('mouseenter touchstart', function(){
-			$(this).next('div').css("top","-170px");
+			fireNextPage();
 		}).on('mouseleave touchend', function(){
-			$(this).next('div').css("top","46px");
+			hideNextPage()
 		});
+
+        $(".sb_share li a").on("click",function(){
+            $.ajax({
+                url: admin_urls.admin_ajax,
+                type: 'post',
+                data: {
+                    'postNonce' : admin_urls.postNonce,
+                    'action' : 'delete_transient',
+                    'post_id' : admin_urls.post_id
+                },
+                success: function(data) {
+                },
+                error: function(error) {
+                }
+             });
+        });
 
         //Smooth Scroll
         $('.sb_comment').click(function() {
@@ -160,7 +188,6 @@
                 return false;
             }
         });
-
 	});
 
 })( jQuery );

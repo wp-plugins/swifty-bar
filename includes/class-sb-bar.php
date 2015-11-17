@@ -68,7 +68,7 @@ class sb_bar {
 	public function __construct() {
 
 		$this->sb_bar = 'sb_bar';
-		$this->version = '1.1.0';
+		$this->version = '1.2.0';
 
 		$this->load_dependencies();
 		$this->define_global_hooks(); // Call to new method that will show for both front and back
@@ -107,6 +107,12 @@ class sb_bar {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sb-bar-admin.php';
 
 		/**
+		 * The class responsible for defining all Settings.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sb-bar-settings.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sb-bar-enable-settings.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -117,6 +123,11 @@ class sb_bar {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sb-bar-global.php';
+
+		/**
+		 * The class responsible for storing and providing shared count info.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-sb-bar-social.php';
 
 		$this->loader = new sb_bar_Loader();
 
@@ -132,9 +143,12 @@ class sb_bar {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new sb_bar_Admin( $this->get_sb_bar(), $this->get_version() );
+		$settings_init_general = new sb_bar_Settings( $this->get_sb_bar() );
+		$settings_init_enable = new sb_bar_Enable_Settings( $this->get_sb_bar() );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'sb_bar_admin_menu' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'settings_api_init' );
+		$this->loader->add_action( 'admin_init', $settings_init_general, 'settings_api_init' );
+		$this->loader->add_action( 'admin_init', $settings_init_enable, 'settings_api_init' );
 		$this->loader->add_filter( 'plugin_action_links_swifty-bar/sb-bar.php', $plugin_admin, 'add_settings_link' );
 
 	}
@@ -155,6 +169,9 @@ class sb_bar {
 
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'front_end' );
 		$this->loader->add_filter( 'the_content', $plugin_public, 'ttr_container' );
+
+		$this->loader->add_action('wp_ajax_nopriv_delete_transient', $plugin_public, 'delete_post_transient');
+		$this->loader->add_action('wp_ajax_delete_transient', $plugin_public, 'delete_post_transient');
 	}
 
 	/**

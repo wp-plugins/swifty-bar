@@ -1,6 +1,8 @@
 <?php
+	wp_reset_query();
 	global $post;
 	$options = (get_option('sb_bar_options') ? get_option('sb_bar_options') : false);
+	$enable_options = (get_option('sb_bar_enable_options') ? get_option('sb_bar_enable_options') : false);
 
 	$post_id = get_queried_object_id();
 	$author_id = get_post_field( 'post_author', $post_id );
@@ -12,7 +14,13 @@
 	$post_type = get_post_type_object( get_post_type($post_id) ); //Needed for custom post types
 	$adjacent = false; //show prev/next post items
 	$tag_or_cat = "category"; // prev/next cat or tag
+	$disable_share_count = isset($enable_options["disable-share-count"]) ? true : false;
+	$old_style = isset($enable_options["old-share-style"]) ? true : false;
 	$posttype = array();
+	if(!isset($enable_options["disable-share"]) && !$disable_share_count) {
+		$social = new sb_bar_Social($post_id);
+		$social_shares = $social->get_shares_all();
+	}
 
 
 	//Post Type
@@ -44,6 +52,13 @@
 		$commentsID = "comments";
 	}
 
+	//twitter via@
+	if(isset($options["twitter-via"]) && $options["twitter-via"] != '') {
+		$via = $options["twitter-via"];
+	} else {
+		$via = "";
+	}
+
 	// Time to read text
 	if(isset($options["ttr-text"]) && $options["ttr-text"] != '') {
 		$ttr_text = $options["ttr-text"];
@@ -70,15 +85,15 @@
 	}
 
 
-
-	if(is_singular() && in_array(get_post_type( $post_id ), $posttype)) {
+	// Just fire on chosen post types, or if just installed and not setup, then on single posts.
+	if((is_singular() && in_array(get_post_type( $post_id ), $posttype)) || ($options == false && is_single())) {
 	?>
 	<!-- Swifty Bar -->
 	<div id="sb_super_bar" class="<?php echo $color; ?>">
 
-		<?php if(!isset($options["disable-ttr"])) { ?>
-			<div class="sbprogress-container"><span class="sbprogress-bar"></span></div>
-		<?php } ?>
+		
+		<div class="sbprogress-container"><span class="sbprogress-bar"></span></div>
+		
 
 		<div id="sb_main_bar">
 
@@ -91,11 +106,22 @@
 			</div>
 
 			<div class="sb_post-data">
-				<h2><?php the_title(); ?></h2>
-				<?php if(!isset($options["disable-author"])) { ?>
+				<h2>
+					<?php if(!isset($options["custom-title"]) || $options["custom-title"] == '') {
+							echo get_the_title();
+						} else {
+							$title = substr(get_the_title(),0,$options["custom-title"]);
+							echo $title;
+							if (strlen($title) >($options["custom-title"] - 2)){
+								echo '…';
+							}
+						}
+					?>
+				</h2>
+				<?php if(!isset($enable_options["disable-author"])) { ?>
 					<span class="sb_author"><?php echo $by_text; ?> <?php echo $author_name; ?></span>
 				<?php } ?>
-				<?php if(!isset($options["disable-ttr"])) { ?>
+				<?php if(!isset($enable_options["disable-ttr"])) { ?>
 				<span class="sb_ttr"><?php echo $ttr_text; ?> <?php echo $ttr; ?> min</span>
 				<?php } ?>
 			</div>
@@ -103,7 +129,7 @@
 			<div class="sb_prev-next-posts">
 				<?php $next_post = get_adjacent_post( $adjacent, '', false, $tag_or_cat ); ?>
 				<?php if ( is_a( $next_post, 'WP_Post' ) ) { ?>
-					<a href="<?php echo get_permalink( $next_post->ID ); ?>"><i class="sbicon-right-open-1"></i></a>
+					<a href="<?php echo get_permalink( $next_post->ID ); ?>"><i class="sbicn-right-open-1"></i></a>
 					<div class="sb_next_post">
 						<div class="sb_next_post_image">
 							<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id($next_post->ID), 'sb_image_size' ); ?>
@@ -131,7 +157,7 @@
 				<?php } ?>
 				<?php $prev_post = get_adjacent_post( $adjacent, '', true, $tag_or_cat ); ?>
 				<?php if ( is_a( $prev_post, 'WP_Post' ) ) { ?>
-					<a href="<?php echo get_permalink( $prev_post->ID ); ?>"><i class="sbicon-left-open-1"></i></a>
+					<a href="<?php echo get_permalink( $prev_post->ID ); ?>"><i class="sbicn-left-open-1"></i></a>
 					<div class="sb_next_post">
 						<div class="sb_next_post_image">
 							<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id($prev_post->ID), 'sb_image_size' ); ?>
@@ -159,19 +185,45 @@
 				<?php } ?>
 			</div>
 
-			<?php if(!isset($options["disable-share"])) { ?>
-			<ul class="sb_share">
-			    <li class="sbfacebook"><a href="#" title="Share on Facebook" class="sbsoc-fb" target="_blank"><i class="sbicon-facebook"></i><span>Share on Facebook</span></a></li>
-			    <li class="sbtwitter"><a href="#" data-title="<?php the_title(); ?>" title="Share on Twitter" class="sbsoc-tw" target="_blank" ><i class="sbicon-twitter"></i><span>Share on Twitter</span></a></li>
-			    <li class="sbgoogle-plus"><a href="#" title="Share on Google Plus" class="sbsoc-gplus" target="_blank"><i class="sbicon-gplus"></i><span>Share on Google Plus</span></a></li>
-			    <li class="sblinkedin"><a href="#" title="Share on Linkedin" class="sbsoc-linked" target="_blank"><i class="sbicon-linkedin"></i><span>Share on LinkedIn</span></a></li>
-    			<li class="sbpinterest"><a href="#" title="Share on Pinterest" class="sbsoc-pint" target="_blank"><i class="sbicon-pinterest"></i><span>Share on Pinterest</span></a></li>
+			<?php if(!isset($enable_options["disable-share"])) { ?>
+			<ul class="sb_share <?php echo ($old_style == true) ? 'old' : '' ?>">
+				<?php if(!isset($enable_options["disable-facebook"])) { ?>
+			    <li class="sbfacebook">
+			    	<a href="#" title="Share on Facebook" class="sbsoc-fb" target="_blank"><i class="sbicn-facebook"></i>
+			    		<?php echo ($disable_share_count == false) ? "<span>".$social_shares['facebook']."</span>" : "" ?>
+			    	</a>
+			    </li>
+			    <?php } if(!isset($enable_options["disable-twitter"])) { ?>
+			    <li class="sbtwitter">
+			    	<a href="#" data-via="<?php echo $via; ?>" data-title="<?php the_title(); ?>" title="Share on Twitter" class="sbsoc-tw" target="_blank" ><i class="sbicn-twitter"></i>
+			    		<?php echo ($disable_share_count == false) ? "<span>".$social_shares['twitter']."</span>" : "" ?>
+					</a>
+				</li>
+			    <?php } if(!isset($enable_options["disable-googleplus"])) { ?>
+			    <li class="sbgoogle-plus">
+			    	<a href="#" title="Share on Google Plus" class="sbsoc-gplus" target="_blank"><i class="sbicn-gplus"></i>
+			    		<?php echo ($disable_share_count == false) ? "<span>".$social_shares['googleplus']."</span>" : "" ?>
+					</a>
+				</li>
+			    <?php } if(!isset($enable_options["disable-linkedin"])) { ?>
+			    <li class="sblinkedin">
+			    	<a href="#" title="Share on Linkedin" class="sbsoc-linked" target="_blank"><i class="sbicn-linkedin"></i>
+			    		<?php echo ($disable_share_count == false) ? "<span>".$social_shares['linkedin']."</span>" : "" ?>
+					</a>
+				</li>
+    			<?php } if(!isset($enable_options["disable-pinterest"])) { ?>
+    			<li class="sbpinterest">
+    				<a href="#" title="Share on Pinterest" class="sbsoc-pint" target="_blank"><i class="sbicn-pinterest"></i>
+    					<?php echo ($disable_share_count == false) ? "<span>".$social_shares['pinterest']."</span>" : "" ?>
+    				</a>
+    			</li>
+				<?php } ?>
 			</ul>
 			<?php } ?>
 
-			<?php if(!isset($options["disable-comments"])) { ?>
+			<?php if(!isset($enable_options["disable-comments"])) { ?>
 			<div class="sb_actions">
-				<a class="sb_comment" href="#<?php echo $commentsID; ?>"><?php echo $comment_count; ?><i class="sbicon-comment"></i></a>
+				<a class="sb_comment" href="#<?php echo $commentsID; ?>"><?php echo $comment_count; ?><i class="sbicn-comment"></i></a>
 			</div>
 			<?php } ?>
 

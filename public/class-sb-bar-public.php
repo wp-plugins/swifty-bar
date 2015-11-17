@@ -50,15 +50,15 @@ class sb_bar_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		// Check if plugin is disabled in options to remove css also.
+		// Call styles only if swifty is enabled and for chosen post types.
 		$options = (get_option('sb_bar_options') ? get_option('sb_bar_options') : false);
-		// Check Post Type to load it only on active Post Type
+		// Post Type
 		$posttype = array();
 		if(isset($options["post-type"]) && $options["post-type"] != '') {
 			$posttype = $options["post-type"];
 		}
 
-		if(!isset($options["disable-bar"]) && is_singular() && in_array(get_post_type(), $posttype)) {
+		if($options == false || (!isset($options["disable-bar"]) && is_singular() && in_array(get_post_type(), $posttype))) {
 			wp_enqueue_style( $this->sb_bar, plugin_dir_url( __FILE__ ) . 'assets/css/sb-bar-public.css', array(), $this->version, 'all' );
 		}
 
@@ -70,7 +70,7 @@ class sb_bar_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		// Check if plugin is disabled in options to remove css also.
+		// Call scripts only if swifty is enabled and for chosen post types.
 		$options = (get_option('sb_bar_options') ? get_option('sb_bar_options') : false);
 		//Post Type
 		$posttype = array();
@@ -78,8 +78,16 @@ class sb_bar_Public {
 			$posttype = $options["post-type"];
 		}
 
-		if(!isset($options["disable-bar"]) && is_singular() && in_array(get_post_type(), $posttype)) {
+		if($options == false || (!isset($options["disable-bar"]) && is_singular() && in_array(get_post_type(), $posttype))) {
+			global $post;
 			wp_enqueue_script( $this->sb_bar, plugin_dir_url( __FILE__ ) . 'assets/js/sb-bar-public.js', array( 'jquery' ), $this->version, false );
+			wp_localize_script($this->sb_bar, 'admin_urls', 
+				array( 
+				'admin_ajax' => admin_url( 'admin-ajax.php'),
+				'post_id' => $post->ID,
+				'postNonce' => wp_create_nonce( 'myajax-post-nonce' )
+				)
+			);
 		}
 	}
 
@@ -108,6 +116,25 @@ class sb_bar_Public {
 		if(!isset($options["disable-bar"])) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/sb-bar-public-display.php';
 		}
+
+	}
+
+	/**
+	 * Remove transient on share click to update shares
+	 *
+	 * @since    1.2.0
+	 */
+	public function delete_post_transient() {
+
+		// Check nounce - security thingy
+		$nonce = $_POST['postNonce'];
+		if ( ! wp_verify_nonce( $nonce, 'myajax-post-nonce' ) ) {
+			die ( 'Busted!');
+		}
+		$post_id = $_POST['post_id'];
+		$transient_name = "sb_bar_".$post_id."_shares";
+
+		delete_transient($transient_name);
 
 	}
 
