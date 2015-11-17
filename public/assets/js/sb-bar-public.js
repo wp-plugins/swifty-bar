@@ -156,9 +156,9 @@
 		});
 
 		$(".sb_prev-next-posts a").on('mouseenter touchstart', function(){
-			fireNextPage();
-		}).on('mouseleave touchend', function(){
-			hideNextPage()
+            $(this).next('div').css("top","-170px");
+        }).on('mouseleave', function(){
+            $(this).next('div').css("top","46px");
 		});
 
         $(".sb_share li a").on("click",function(){
