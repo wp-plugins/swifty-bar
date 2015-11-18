@@ -310,6 +310,9 @@ body.single {
 .sb_share.old li a i {
   border-radius: 0;
 }
+.sb_share.old li a i:after{
+  display: none;
+}
 .sb_share li a i:after {
   content: "";
   position: absolute;
