@@ -27,6 +27,10 @@ Major features in Swifty Bar include:
 * Supports custom post types.
 * Share counter
 
+**Share Count in 1.2!**
+
+We introduced share count in latest version of swifty bar. We are saving share counts inside WP Transients to keep things fast and fetching new shares once user clicks on any of the share icons, if no clicks have been made, share will refresh once daily, that way site is doing minimal requests to the share APIs which boosts its speed by ALOT.
+
 If you have any suggestions/feedback to improve Swifty Bar, please get in touch with me via email goranefbl@gmail.com .
 
 
