@@ -31,7 +31,7 @@
     			case 'twitter':
                     var posttitle = $(".sbtwitter a").data("title");
                     var via = $(".sbtwitter a").data("via");
-                    var url = 'https://twitter.com/intent/tweet?via='+via+'text='+posttitle+'&url=';
+                    var url = 'https://twitter.com/intent/tweet?via='+via+'&text='+posttitle+'&url=';
     				var name = 'Twitter';
     				_popup(url, name, opts[opt], 440, 600);
     				break;

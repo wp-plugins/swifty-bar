@@ -3,7 +3,7 @@ Contributors: goran87
 Tags: share buttons,sticky bar, footer bar, previous next posts, time to read, progress bar, simple share, share icons, sticky share,author,social,twitter,facebook
 Requires at least: 3.0
 Tested up to: 4.3.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
